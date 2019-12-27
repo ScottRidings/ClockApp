@@ -1,25 +1,41 @@
-var hour = new Date();
-var minute = new Date();
-var second = new Date();
+setInterval(newDateTime, 1000)
 
-if (hour.getHours() < 12) {
-  var txtHour = ("0" + hour.getHours()).substr(-2).toString();
-  document.getElementById("timeAmPm").innerHTML = "AM";
-} else {
-  var numHours = new Date();
-  numHours.setHours(hour.getHours() - 12);
-  var txtHour = ("0" + numHours.getHours()).substr(-2).toString();
-  document.getElementById("timeAmPm").innerHTML = "PM";
+function newDateTime() {
+	var hour = new Date();
+	var minute = new Date();
+	var second = new Date();
+
+	var displayMode = document.getElementById("cbxDisplayMode").checked;
+	if (displayMode == false){
+		
+		if (hour.getHours() < 12) {
+		  if (hour.getHours() == 0) {
+			txtHour = "12";
+		  } else {
+			var txtHour = ("0" + hour.getHours()).substr(-2).toString();
+		  }
+		  document.getElementById("timeAmPm").innerHTML = "AM";
+		} else {
+		  var numHours = new Date();
+		  numHours.setHours(hour.getHours() - 12);
+		  var txtHour = ("0" + numHours.getHours()).substr(-2).toString();
+		  document.getElementById("timeAmPm").innerHTML = "PM";
+		}
+		
+	} else {
+		var txtHour = ("0" + hour.getHours()).substr(-2).toString();
+		document.getElementById("timeAmPm").innerHTML = "";
+	}
+	  
+	document.getElementById("timeNow").innerHTML = txtHour + ":" + ("0" + minute.getMinutes()).substr(-2) + " " + ("0" + second.getSeconds()).substr(-2);
+
+
+	var day = new Date();
+	var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	var month = new Date();
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var date = new Date();
+	var year = new Date();
+
+	document.getElementById("dateToday").innerHTML = days[day.getDay()] + ", " + months[month.getMonth()] + " " + ("0"+date.getDate()).substr(-2) + ", " + year.getFullYear();
 }
-
-document.getElementById("timeNow").innerHTML = txtHour + ":" + ("0" + minute.getMinutes()).substr(-2) + " " + ("0" + second.getSeconds()).substr(-2);
-
-
-var day = new Date();
-var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var month = new Date();
-var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var date = new Date();
-var year = new Date();
-
-document.getElementById("dateToday").innerHTML = days[day.getDay()] + ", " + months[month.getMonth()] + " " + ("0"+date.getDate()).substr(-2) + ", " + year.getFullYear();
